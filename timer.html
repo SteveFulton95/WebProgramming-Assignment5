@@ -1,0 +1,80 @@
+<html>
+
+<head>
+
+<link rel="stylesheet" type="text/css" href="CSS\timer.css">
+
+<script>
+	
+	var PATH = "resources/timer";
+	var NUMBER_OF_IMAGES = 5;
+	var timerImages = new Array(NUMBER_OF_IMAGES);
+
+	function initialize(){
+		for(var i = 0; i < NUMBER_OF_IMAGES; i++){
+			var image = new Image();
+			image.id = i;
+			image.src = PATH + (i+1) + ".png";
+			timerImages[i] = image;
+		}
+		timer();
+	}
+
+	var index = 0;	// index of image
+	var imageId = "Image";	// id of the image tags
+	var imageTag = new Image();	// a new image
+	function timer(){
+		imageTag.src = "";
+		if(index == (NUMBER_OF_IMAGES-1)){
+			removeDiv();
+		}
+			
+		imageTag = new Image();
+		var imageToSet = timerImages[index];
+		imageTag = document.getElementById(imageId + (index+1));
+		
+		imageTag.src = imageToSet.src;
+		
+		// update index of image
+		index++;
+		// every 15 seconds
+		var timeout = window.setTimeout("timer();", 1000);
+		if(index == NUMBER_OF_IMAGES){
+			clearTimeout(timeout);
+		}
+	}
+	
+	function removeDiv(){
+		for(var i = 0; i < NUMBER_OF_IMAGES-1; i++){
+			var element = document.getElementById("div" + i);
+			element.parentNode.removeChild(element);
+		}
+	}
+
+</script>
+
+</head>
+
+<body onload="initialize();">
+
+	<div class="timedImages">
+		<div id="div0" class="imgContainer">
+			<img class="img" id="Image1" height="200" width="200"/>
+		</div>
+		<div id="div1" class="imgContainer">
+			<img class="img" id="Image2" height="200" width="200"/>
+		</div>
+		<div id="div2" class="imgContainer">
+			<img class="img" id="Image3" height="200" width="200"/>
+		</div>
+		<div id="div3" class="imgContainer">
+			<img class="img" id="Image4" height="200" width="200"/>
+		</div>
+		<div id="div4" >
+			<img class="img" id="Image5" height="200" width="800"/>
+		</div>
+	</div>
+
+</body>
+
+</html>
