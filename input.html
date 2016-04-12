@@ -1,0 +1,29 @@
+<html>
+<script>
+	function init(){
+		var div = document.createElement('div');
+		div.innerHTML = "Institution <input type='text' id='instName'></input>";
+		document.getElementById('inputContainer').appendChild(div);
+		div = document.createElement('div');
+		div.innerHTML = "Number of faculty <input type='number' min='0' max='100' step='1' id='faculty'></input>";
+		document.getElementById('inputContainer').appendChild(div);
+		div = document.createElement('div');
+		div.innerHTML = "Institution type <select><option value='Primarily undergrad'>Primarily undergrad</option>";
+		div.innerHTML += "<option value='Graduate'>Graduate</option> </select>";
+		div.innerHTML += "</select>";
+		document.getElementById('inputContainer').appendChild(div);
+	}
+	function checkIt(){
+		
+	}
+</script>
+
+<body onload="init();">
+	<div align="center" id="inputContainer">
+	
+		<!-- <div id="faculty"></div><div id="instType"></div><div id="numUGDS"></div><div id="numGDS"></div><div id="degrees"></div><div id="majors"></div> -->
+		<button onclick="checkIt()">Check it</button>
+	</div>
+</body>
+
+</html>
