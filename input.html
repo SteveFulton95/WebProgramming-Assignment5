@@ -1,29 +1,53 @@
 <html>
 <script>
 	function checkIt(){
+		var hasError = false;
 		var institution = document.getElementById('institution');
 		var faculty = document.getElementById("faculty");
+		var numFaculty = faculty.children[0].value;
+		var numGradUndergrad = document.getElementById("numGradUndergrad");
+		var numUGDS = numGradUndergrad.children[1].value;
+		var numGDS = numGradUndergrad.children[2].value;
 		var instName = institution.children[0].value;
 		if(instName.length > 0){
-			if(instName.length > 6){
-				institution.innerHTML += "<font color='red'>Institution can only be 6 words</font><br>";
-			}
 			if(!instName.match(/^[a-zA-Z\s-']/)){
+				hasError = true;
 				institution.innerHTML += "<font color='red'>Institution can only contain a-z,'-',' ',and '</font><br>";
 			}
-			instName.split(" ");
+			instName = instName.split(" ");
+			if(instName.length > 6){
+				hasError = true;
+				institution.innerHTML += "<font color='red'>Institution can only be 6 words</font><br>";
+			}
 		}
 		else{
+			hasError = true;
 			institution.innerHTML += "<font color='red'>Institution cannot be empty</font><br>";
 		}
-		if(faculty.children[0].value < 0 || faculty.children[0].value > 100 || faculty.children[0].value == '') {
-			faculty.innerHTML += "<font color='red'>Faculty must be 0-100</font><br>";
+		if(numFaculty.match(/[^0-9]/) || numFaculty < 0 || numFaculty > 100 || numFaculty == '') {
+			hasError = true;
+			faculty.innerHTML += "<font color='red'>Faculty must be an integer 0-100</font><br>";
 		}
+		if(numUGDS < 0 || numUGDS > 1000 || numUGDS.match(/[^0-9]/)){
+			hasError = true;
+			numGradUndergrad.innerHTML += "<font color='red'>Number of undergraduates must be an integer 0-1000</font><br>";
+		}
+		if(numGDS < 0 || numGDS > 1000 || numGDS.match(/[^0-9]/)){
+			hasError = true;
+			numGradUndergrad.innerHTML += "<font color='red'>Number of graduates must be an integer 0-300</font><br>";
+		}
+		if(!hasError){
+			success();
+		}
+	}
+	
+	function success(){
+		alert("Show a success page");
 	}
 </script>
 
 <body>
-	<div align="center" id="inputContainer">
+	<div align="left" id="inputContainer">
 		<div id='institution'>
 			Institution <input type='text'><br>
 		</div>
@@ -38,19 +62,25 @@
 				<option value='Doctorate'>Doctorate</option>
 			</select><br>
 		</div>
-		Number of undergraduates Number of graduates<br>
-		<input align='left' style="width:40px" style="float:left" type='number' id='numUGDS'>
-		<input type='readonly' id='numUnderGradError' style="width:150px; border:none" >
-		<input align='right' style="width:40px" style="float:right" type='number' id='numGDS'><br>
-		Degrees 
-		<input type='checkbox' id='BS'>BS
-		<input type='checkbox' id='BA'>BA
-		<input type='checkbox' id='MS'>MS
-		<input type='checkbox' id='PHD'>PHD<br>
-		Majors
-		<input type='checkbox' id='CS'>CS
-		<input type='checkbox' id='IS'>IS
-		<input type='checkbox' id='IT'>IT<br>
+		<div id='numGradUndergrad'>
+			Number of undergraduates Number of graduates<br>
+			<input align='left' type='number' id='numUGDS'>
+			<!--<input type='readonly' id='numUnderGradError' style="width:150px; border:none" >-->
+			<input align='right' type='number' id='numGDS'><br>
+		</div>
+		<div id='degrees'>
+			Degrees 
+			<input type='checkbox' id='BS'>BS
+			<input type='checkbox' id='BA'>BA
+			<input type='checkbox' id='MS'>MS
+			<input type='checkbox' id='PHD'>PHD<br>
+		</div>
+		<div id='majors'>
+			Majors
+			<input type='checkbox' id='CS'>CS
+			<input type='checkbox' id='IS'>IS
+			<input type='checkbox' id='IT'>IT<br>
+		</div>
 		<button onclick="checkIt()">Check it</button>
 	</div>
 </body>
