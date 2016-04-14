@@ -2,8 +2,6 @@
 
 <head>
 
-<link rel="stylesheet" type="text/css" href="CSS\timer.css">
-
 <script>
 	
 	var PATH = "resources/timer";
@@ -38,7 +36,7 @@
 		// update index of image
 		index++;
 		// every 15 seconds
-		var timeout = window.setTimeout("timer();", 15000);
+		var timeout = window.setTimeout("timer();", 1000);
 		if(index == NUMBER_OF_IMAGES){
 			clearTimeout(timeout);
 		}
@@ -53,11 +51,24 @@
 
 </script>
 
+<style>
+.div {
+	width: 800px;
+    height: 200px;
+    border: thin solid black;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.imgContainer {
+	float:left;
+}
+</style>
+
 </head>
 
 <body onload="initialize();">
 
-	<div align="center" style="overflow: hidden;">
+	<div align="center" id="div" class="div">
 		<div id="div0" class="imgContainer">
 			<img class="img" id="Image1" height="200" width="200"/>
 		</div>
