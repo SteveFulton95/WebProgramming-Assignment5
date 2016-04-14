@@ -38,7 +38,7 @@
 		// update index of image
 		index++;
 		// every 15 seconds
-		var timeout = window.setTimeout("timer();", 1000);
+		var timeout = window.setTimeout("timer();", 15000);
 		if(index == NUMBER_OF_IMAGES){
 			clearTimeout(timeout);
 		}
@@ -57,7 +57,7 @@
 
 <body onload="initialize();">
 
-	<div class="timedImages">
+	<div align="center" style="overflow: hidden;">
 		<div id="div0" class="imgContainer">
 			<img class="img" id="Image1" height="200" width="200"/>
 		</div>
