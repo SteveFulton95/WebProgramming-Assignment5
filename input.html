@@ -37,17 +37,30 @@
 			numGradUndergrad.innerHTML += "<font color='red'>Number of graduates must be an integer 0-300</font><br>";
 		}
 		if(!hasError){
+			//alert(parent.frames[0]);
 			success();
 		}
 	}
 	
 	function success(){
-		alert("Show a success page");
+		// my attempt of using cookies to pass the values...could not figure it out so I gave up for now.
+		
+		/*var institution = document.getElementById("institution").getElementsByTagName("input");
+		var faculty = document.getElementById("faculty");
+		var instType = document.getElementById("instType");
+		var numGradUndergrad = document.getElementById("numGradUndergrad");
+		var degrees = document.getElementById("degrees");
+		var majors = document.getElementById("majors");
+		
+		alert(institution[0].value);
+		document.cookie = "" + institution[0].value + "; path=/success.html;";*/
+		var w = window.open("success.html");
+		w.postMessage("hello", "C:\Users\Steve\Documents\College\Structured and Dynamic Web Programming\as5\success.html");
 	}
 </script>
 
 <body>
-	<div align="left" id="inputContainer">
+	<form id="TheForm">
 		<div id='institution'>
 			Institution <input type='text'><br>
 		</div>
@@ -82,7 +95,7 @@
 			<input type='checkbox' id='IT'>IT<br>
 		</div>
 		<button onclick="checkIt()">Check it</button>
-	</div>
+	</form>
 </body>
 
 </html>
