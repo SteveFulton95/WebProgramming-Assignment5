@@ -9,8 +9,7 @@
 		var numUGDS = numGradUndergrad.children[1].value;
 		var numGDS = numGradUndergrad.children[2].value;
 		var instName = institution.children[0].value;
-		var time = parent.frames[0].document.getElementById("div3");
-		
+		var time = window.parent.frames[0].document.getElementById("div3");
 		
 		if(time === null) {
 			hasError = true;
@@ -48,21 +47,37 @@
 			success();
 		}
 	}
-	
 	function success(){
 		// my attempt of using cookies to pass the values...could not figure it out so I gave up for now.
 		
-		/*var institution = document.getElementById("institution").getElementsByTagName("input");
-		var faculty = document.getElementById("faculty");
-		var instType = document.getElementById("instType");
+		var institution = document.getElementById("institution").children[0].value;
+		var faculty = document.getElementById("faculty").children[0].value;
+		var instType = document.getElementById("instType").children[0].value;
 		var numGradUndergrad = document.getElementById("numGradUndergrad");
-		var degrees = document.getElementById("degrees");
-		var majors = document.getElementById("majors");
+		var degrees = document.getElementById("degrees").children;
+		var majors = document.getElementById("majors").children;
 		
-		alert(institution[0].value);
-		document.cookie = "" + institution[0].value + "; path=/success.html;";*/
 		var w = window.open("success.html");
-		//w.postMessage("hello", "C:\Users\Steve\Documents\College\Structured and Dynamic Web Programming\as5\success.html");
+		var doc = w.document;
+		
+		doc.write("Selected institution : " + institution + "<br>");
+		doc.write("Number of faculty : " + faculty + "<br>");
+		doc.write("Institution Type : " + instType + "<br>");
+		doc.write("Numbe of undergraduates : " + numGradUndergrad.children[1].value + "<br>");
+		doc.write("Numbe of graduates : " + numGradUndergrad.children[2].value + "<br>");
+		doc.write("Degree types : ");
+		for(var i = 0; i < degrees.length; i++){
+			if(degrees[i].checked){
+				doc.write(degrees[i].id + ' ');
+			}
+		}
+		doc.write("<br>");
+		doc.write("Majors : ");
+		for(var i = 0; i < majors.length; i++){
+			if(majors[i].checked){
+				doc.write(majors[i].id + ' ');
+			}
+		}
 	}
 </script>
 
@@ -85,7 +100,6 @@
 		<div id='numGradUndergrad'>
 			Number of undergraduates Number of graduates<br>
 			<input align='left' type='number' id='numUGDS'>
-			<!--<input type='readonly' id='numUnderGradError' style="width:150px; border:none" >-->
 			<input align='right' type='number' id='numGDS'><br>
 		</div>
 		<div id='degrees'>
@@ -101,7 +115,7 @@
 			<input type='checkbox' id='IS'>IS
 			<input type='checkbox' id='IT'>IT<br>
 		</div>
-		<button onclick="checkIt()">Check it</button>
+		<input type='button' value='Check it' onclick='checkIt()'>
 	</form>
 </body>
 
